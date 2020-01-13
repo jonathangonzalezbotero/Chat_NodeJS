@@ -1,0 +1,23 @@
+{
+  "name": "node",
+  "version": "0.1.0",
+  "description": "Un chat como telegram",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type" : "git",
+    "url" : "git@github.com:jonathan1033739673/Chat_NodeJS.git"
+  },
+  "keywords": [
+    "chat",
+    "telegram",
+    "server"
+  ],
+  "author": "Jonathan Gonzalez",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
