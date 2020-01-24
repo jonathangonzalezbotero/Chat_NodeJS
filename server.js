@@ -1,23 +1,21 @@
 const express = require('express')
-const router = express.Router()
+const app = express();//inicializamos una variable que contenga los datos del servidor express
+const server = require('http').Server(app)
 
-var app = express();//inicializamos una variable que contenga los datos del servidor express
+const cors = require('cors')
+const bodyParser = require('body-parser')
+const router = require('./network/routers')
+const dataBase = require('./db')
+const socket = require('./socket')
 
-app.listen(3000); // seteamos el puerto en donde voy a correr la aplicacion
-app.use(router)
-router.get('/message', function(request, response){ // indicamos que para cualquier ruta que escuche con / hara el llamado a la funcion
-  response.send('Lista de mensajes');
-});
+dataBase.connect()
+socket.connect(server)
 
-router.post('/message', function(request, response){ // indicamos que para cualquier ruta que escuche con / hara el llamado a la funcion
-  response.send('Mensaje añadido');
-});
+app.use(cors())
+app.use(bodyParser.json())
+app.use('/', express.static('public'))
+router(app)
 
-router.delete('/', function(request, response){ // indicamos que para cualquier ruta que escuche con / hara el llamado a la funcion
-  response.send('DELETE desde router');
-});
-/*app.use('/', function(request, response){ // indicamos que para cualquier ruta que escuche con / hara el llamado a la funcion
-  response.send('Hola amigos');
-});*/
-
-console.log('La aplicacion esta escuchando en http://localhost:3000');
+server.listen(3000, () =>{
+  console.log('La aplicacion esta escuchando en http://localhost:3000');
+})
